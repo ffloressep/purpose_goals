@@ -1,304 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<title>Anamnese de Objetivos Pessoais</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
-    margin: 0;
-    padding: 20px;
-}
-.container {
-    max-width: 800px;
-    margin: auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h1 {
-    text-align: center;
-    color: #333;
-}
-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #444;
-}
-textarea {
-    width: 100%;
-    height: 80px;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    resize: vertical;
-}
-.options-label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-}
-.checkbox-group {
-    margin-bottom: 10px;
-    margin-top: 0;
-}
-.checkbox-group label {
-    font-weight: normal;
-    color: #222;
-    margin-right: 18px;
-}
-button {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background-color: #add8e6;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #87ceeb;
-}
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-    textarea {
-        height: 60px;
-    }
-    button {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planner Pessoal</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<div class="container">
-<h1>Anamnese de Objetivos Pessoais</h1>
-<form id="anamneseForm">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="max-w-5xl w-full p-6 bg-white shadow-xl rounded-2xl">
+    <h1 class="text-2xl font-bold text-center mb-6">Planner Pessoal</h1>
+    
+    <div id="categories" class="grid md:grid-cols-2 gap-6"></div>
+  </div>
 
-<!-- Finanças -->
-<div class="section">
-    <label for="financas">Finanças</label>
-    <textarea id="financas" name="Finanças"></textarea>
-    <span class="options-label">Qual foi o valor mais alto que você já teve em dívidas pessoais?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="financas_opcoes" value="Nunca tive dívidas"/> Nunca tive dívidas</label>
-        <label><input type="checkbox" name="financas_opcoes" value="Até R$ 1.000"/> Até R$ 1.000</label>
-        <label><input type="checkbox" name="financas_opcoes" value="Entre R$ 1.001 e R$ 10.000"/> Entre R$ 1.001 e R$ 10.000</label>
-        <label><input type="checkbox" name="financas_opcoes" value="Entre R$ 10.001 e R$ 50.000"/> Entre R$ 10.001 e R$ 50.000</label>
-        <label><input type="checkbox" name="financas_opcoes" value="Acima de R$ 50.000"/> Acima de R$ 50.000</label>
-    </div>
-</div>
-
-<!-- Saúde e Bem-estar -->
-<div class="section">
-    <label for="saude">Saúde e Bem-estar</label>
-    <textarea id="saude" name="Saúde e Bem-estar"></textarea>
-    <span class="options-label">Você já fez uso regular de medicamentos controlados ou teve internações psiquiátricas?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="saude_opcoes" value="Nunca usei medicamentos controlados"/> Nunca usei medicamentos controlados</label>
-        <label><input type="checkbox" name="saude_opcoes" value="Uso atual de medicamentos controlados"/> Uso atual de medicamentos controlados</label>
-        <label><input type="checkbox" name="saude_opcoes" value="Já fui internado(a) psiquiatricamente"/> Já fui internado(a) psiquiatricamente</label>
-        <label><input type="checkbox" name="saude_opcoes" value="Uso ocasional de medicamentos controlados"/> Uso ocasional de medicamentos controlados</label>
-        <label><input type="checkbox" name="saude_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Relacionamentos -->
-<div class="section">
-    <label for="relacionamentos">Relacionamentos</label>
-    <textarea id="relacionamentos" name="Relacionamentos"></textarea>
-    <span class="options-label">Você já traiu algum(a) parceiro(a) ou foi traído(a)?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="relacionamentos_opcoes" value="Já traí"/> Já traí</label>
-        <label><input type="checkbox" name="relacionamentos_opcoes" value="Já fui traído(a)"/> Já fui traído(a)</label>
-        <label><input type="checkbox" name="relacionamentos_opcoes" value="Ambos"/> Ambos</label>
-        <label><input type="checkbox" name="relacionamentos_opcoes" value="Nenhum dos dois"/> Nenhum dos dois</label>
-        <label><input type="checkbox" name="relacionamentos_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Espiritualidade -->
-<div class="section">
-    <label for="espiritualidade">Espiritualidade</label>
-    <textarea id="espiritualidade" name="Espiritualidade"></textarea>
-    <span class="options-label">Você já mudou radicalmente de religião ou deixou de acreditar em algo que era fundamental para você?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="espiritualidade_opcoes" value="Já mudei de religião"/> Já mudei de religião</label>
-        <label><input type="checkbox" name="espiritualidade_opcoes" value="Já abandonei toda crença religiosa"/> Já abandonei toda crença religiosa</label>
-        <label><input type="checkbox" name="espiritualidade_opcoes" value="Nunca mudei/minha fé é a mesma"/> Nunca mudei/minha fé é a mesma</label>
-        <label><input type="checkbox" name="espiritualidade_opcoes" value="Tenho dúvidas frequentes"/> Tenho dúvidas frequentes</label>
-        <label><input type="checkbox" name="espiritualidade_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Conhecimento -->
-<div class="section">
-    <label for="conhecimento">Conhecimento</label>
-    <textarea id="conhecimento" name="Conhecimento"></textarea>
-    <span class="options-label">Você já colou em provas importantes ou entregou trabalhos que não eram seus?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="conhecimento_opcoes" value="Já colei em provas"/> Já colei em provas</label>
-        <label><input type="checkbox" name="conhecimento_opcoes" value="Já entreguei trabalhos de terceiros"/> Já entreguei trabalhos de terceiros</label>
-        <label><input type="checkbox" name="conhecimento_opcoes" value="Nunca cometi essas ações"/> Nunca cometi essas ações</label>
-        <label><input type="checkbox" name="conhecimento_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Profissional e Carreira -->
-<div class="section">
-    <label for="profissional">Profissional e Carreira</label>
-    <textarea id="profissional" name="Profissional e Carreira"></textarea>
-    <span class="options-label">Você já foi demitido(a) por justa causa ou pediu demissão em situação de briga?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="profissional_opcoes" value="Já fui demitido(a) por justa causa"/> Já fui demitido(a) por justa causa</label>
-        <label><input type="checkbox" name="profissional_opcoes" value="Já pedi demissão após briga"/> Já pedi demissão após briga</label>
-        <label><input type="checkbox" name="profissional_opcoes" value="Nunca passei por isso"/> Nunca passei por isso</label>
-        <label><input type="checkbox" name="profissional_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Social -->
-<div class="section">
-    <label for="social">Social</label>
-    <textarea id="social" name="Social"></textarea>
-    <span class="options-label">Você já foi denunciado(a) ou processado(a) judicialmente por terceiros?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="social_opcoes" value="Já fui denunciado(a)"/> Já fui denunciado(a)</label>
-        <label><input type="checkbox" name="social_opcoes" value="Já fui processado(a)"/> Já fui processado(a)</label>
-        <label><input type="checkbox" name="social_opcoes" value="Nunca passei por isso"/> Nunca passei por isso</label>
-        <label><input type="checkbox" name="social_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<!-- Recreativo (Lazer e Hobbies) -->
-<div class="section">
-    <label for="recreativo">Recreativo (Lazer e Hobbies)</label>
-    <textarea id="recreativo" name="Recreativo (Lazer e Hobbies)"></textarea>
-    <span class="options-label">Você já escondeu de familiares ou amigos algum hobby ou passatempo por vergonha?</span>
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="recreativo_opcoes" value="Sim, já escondi hobbies"/> Sim, já escondi hobbies</label>
-        <label><input type="checkbox" name="recreativo_opcoes" value="Nunca escondi hobbies"/> Nunca escondi hobbies</label>
-        <label><input type="checkbox" name="recreativo_opcoes" value="Ainda escondo hobbies ou passatempos"/> Ainda escondo hobbies ou passatempos</label>
-        <label><input type="checkbox" name="recreativo_opcoes" value="Prefiro não responder"/> Prefiro não responder</label>
-    </div>
-</div>
-
-<button onclick="gerarPDF()" type="button">Gerar Relatório em PDF</button>
-</form>
-<script>
-async function gerarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.setFillColor(230, 230, 250);
-    doc.text("Relatório de Objetivos Pessoais", 105, 20, { align: "center" });
-
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    let y = 30;
-
-    // Define areas and their corresponding intrusive question and checkbox name
-    const areas = [
-        {
-            nome: "Finanças",
-            id: "financas",
-            opcoes: "financas_opcoes",
-            pergunta: "Qual foi o valor mais alto que você já teve em dívidas pessoais?"
-        },
-        {
-            nome: "Saúde e Bem-estar",
-            id: "saude",
-            opcoes: "saude_opcoes",
-            pergunta: "Você já fez uso regular de medicamentos controlados ou teve internações psiquiátricas?"
-        },
-        {
-            nome: "Relacionamentos",
-            id: "relacionamentos",
-            opcoes: "relacionamentos_opcoes",
-            pergunta: "Você já traiu algum(a) parceiro(a) ou foi traído(a)?"
-        },
-        {
-            nome: "Espiritualidade",
-            id: "espiritualidade",
-            opcoes: "espiritualidade_opcoes",
-            pergunta: "Você já mudou radicalmente de religião ou deixou de acreditar em algo que era fundamental para você?"
-        },
-        {
-            nome: "Conhecimento",
-            id: "conhecimento",
-            opcoes: "conhecimento_opcoes",
-            pergunta: "Você já colou em provas importantes ou entregou trabalhos que não eram seus?"
-        },
-        {
-            nome: "Profissional e Carreira",
-            id: "profissional",
-            opcoes: "profissional_opcoes",
-            pergunta: "Você já foi demitido(a) por justa causa ou pediu demissão em situação de briga?"
-        },
-        {
-            nome: "Social",
-            id: "social",
-            opcoes: "social_opcoes",
-            pergunta: "Você já foi denunciado(a) ou processado(a) judicialmente por terceiros?"
-        },
-        {
-            nome: "Recreativo (Lazer e Hobbies)",
-            id: "recreativo",
-            opcoes: "recreativo_opcoes",
-            pergunta: "Você já escondeu de familiares ou amigos algum hobby ou passatempo por vergonha?"
-        }
+  <script>
+    const categories = [
+      {
+        name: "Saúde e Bem-estar",
+        items: [
+          "Avaliei minha saúde física (exames, energia, sono, peso).",
+          "Tenho uma meta clara (ex: melhorar condicionamento, emagrecer, dormir melhor).",
+          "Defini pelo menos 1 ação prática diária/semanal.",
+          "Coloquei um prazo realista para alcançar a meta.",
+          "Tenho como medir progresso (ex: frequência cardíaca, peso, disposição)."
+        ]
+      },
+      {
+        name: "Finanças",
+        items: [
+          "Tenho clareza do meu orçamento mensal (entradas e saídas).",
+          "Defini uma meta financeira (ex: quitar dívidas, formar reserva, investir).",
+          "Listei ações práticas (ex: cortar gastos, automatizar poupança).",
+          "Estabeleci prazos.",
+          "Sei como medir progresso (saldo, patrimônio, % da meta atingida)."
+        ]
+      },
+      {
+        name: "Relacionamentos",
+        items: [
+          "Avaliei a qualidade dos meus vínculos (família, amigos, parceiro(a)).",
+          "Defini uma meta (ex: fortalecer amizades, melhorar comunicação).",
+          "Ações práticas (ex: reservar tempo semanal, conversar mais abertamente).",
+          "Prazo definido.",
+          "Critério de progresso (mais encontros, maior proximidade, menos conflitos)."
+        ]
+      },
+      {
+        name: "Espiritualidade",
+        items: [
+          "Tenho clareza sobre a prática espiritual que me conecta.",
+          "Defini meta (ex: meditar diariamente, estudar filosofia, participar de grupo).",
+          "Ação prática inserida na rotina.",
+          "Prazo para manter consistência.",
+          "Critério de progresso (paz interior, disciplina, clareza mental)."
+        ]
+      },
+      {
+        name: "Profissão e Carreira",
+        items: [
+          "Avaliei minha satisfação atual com o trabalho.",
+          "Tenho meta (ex: promoção, transição de carreira, curso novo).",
+          "Ação prática clara (ex: networking, capacitação, portfólio).",
+          "Estabeleci prazo.",
+          "Critério de progresso (avaliação de desempenho, novas oportunidades)."
+        ]
+      },
+      {
+        name: "Autoconhecimento",
+        items: [
+          "Avaliei meu nível atual de autoconhecimento.",
+          "Meta definida (ex: conhecer pontos fortes, vencer limitações).",
+          "Ação prática (ex: terapia, journaling, leitura de autodesenvolvimento).",
+          "Prazo estabelecido.",
+          "Critério de progresso (maior clareza, decisões mais conscientes)."
+        ]
+      },
+      {
+        name: "Lazer e Hobbies",
+        items: [
+          "Listei atividades que me dão prazer e recarregam energia.",
+          "Meta definida (ex: voltar a tocar, viajar, aprender algo novo).",
+          "Ação prática semanal inserida.",
+          "Prazo definido.",
+          "Critério de progresso (frequência de prática, satisfação)."
+        ]
+      },
+      {
+        name: "Trabalho Social",
+        items: [
+          "Avaliei minha contribuição atual para a sociedade.",
+          "Defini meta (ex: voluntariado, doações, mentoria).",
+          "Ação prática clara e regular.",
+          "Prazo estabelecido.",
+          "Critério de progresso (impacto percebido, regularidade da contribuição)."
+        ]
+      }
     ];
 
-    areas.forEach(area => {
-        const resposta = document.getElementById(area.id).value.trim();
-        const checkboxes = document.querySelectorAll(`input[name="${area.opcoes}"]:checked`);
-        const opcoesMarcadas = Array.from(checkboxes).map(cb => cb.value);
+    const container = document.getElementById("categories");
 
-        doc.setFont("helvetica", "bold");
-        doc.text(area.nome, 10, y);
-        y += 6;
+    categories.forEach((cat, index) => {
+      const card = document.createElement("div");
+      card.className = "bg-gray-50 p-4 rounded-xl shadow-md";
 
-        doc.setFont("helvetica", "italic");
-        doc.text(area.pergunta, 10, y);
-        y += 6;
+      const title = document.createElement("h2");
+      title.className = "text-lg font-semibold mb-3";
+      title.innerText = `${index + 1}. ${cat.name}`;
+      card.appendChild(title);
 
-        if (opcoesMarcadas.length) {
-            doc.setFont("helvetica", "normal");
-            doc.text("Opções selecionadas: " + opcoesMarcadas.join(", "), 10, y);
-            y += 6;
-        }
+      cat.items.forEach((item, idx) => {
+        const label = document.createElement("label");
+        label.className = "flex items-center space-x-2 mb-2";
 
-        if (resposta) {
-            doc.setFont("helvetica", "normal");
-            const lines = doc.splitTextToSize(resposta, 180);
-            doc.text(lines, 10, y);
-            y += lines.length * 6 + 4;
-        } else {
-            y += 4;
-        }
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "form-checkbox h-5 w-5 text-blue-500";
 
-        if (y > 270) {
-            doc.addPage();
-            y = 20;
-        }
+        const key = `${cat.name}-${idx}`;
+        input.checked = localStorage.getItem(key) === "true";
+
+        input.addEventListener("change", () => {
+          localStorage.setItem(key, input.checked);
+        });
+
+        const span = document.createElement("span");
+        span.innerText = item;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        card.appendChild(label);
+      });
+
+      container.appendChild(card);
     });
-
-    doc.save("relatorio_objetivos.pdf");
-}
-</script>
-</div>
+  </script>
 </body>
 </html>
